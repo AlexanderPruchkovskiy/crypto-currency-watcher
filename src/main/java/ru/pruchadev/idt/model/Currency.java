@@ -9,7 +9,20 @@ import java.util.List;
 @Table(name = "currencies", uniqueConstraints = {@UniqueConstraint(columnNames =  "currency_code", name = "currencies_unique_currency_code_idx")})
 public class Currency extends AbstractBaseEntity{
 
+
+    public Currency() {
+
+    }
+
+
     public Currency(@NotNull double currentPrice, @NotNull Integer currency_code, @NotBlank String symbol) {
+        this.currentPrice = currentPrice;
+        this.currency_code = currency_code;
+        this.symbol = symbol;
+    }
+
+    public Currency(Integer id, @NotNull double currentPrice, @NotNull Integer currency_code, @NotBlank String symbol) {
+        super(id);
         this.currentPrice = currentPrice;
         this.currency_code = currency_code;
         this.symbol = symbol;
@@ -38,4 +51,8 @@ public class Currency extends AbstractBaseEntity{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "currency")
     @OrderBy("userName DESC")
     protected List<User> users;
+
+    public void setCurrentPrice(double currentPrice) {
+        this.currentPrice = currentPrice;
+    }
 }

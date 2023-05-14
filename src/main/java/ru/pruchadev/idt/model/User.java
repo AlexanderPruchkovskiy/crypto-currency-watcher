@@ -14,6 +14,14 @@ import javax.validation.constraints.NotNull;
                                            name = "users_unique_currency_userName_idx" )})
 public class User extends AbstractNamedEntity {
 
+    public User() {
+    }
+    public User(Integer id, String userName, @NotBlank String symbol, @NotNull double regPrice) {
+        super(id, userName);
+        this.symbol = symbol;
+        this.regPrice = regPrice;
+    }
+
     @Column(name = "symbol", nullable = false, unique = true)
     @NotBlank
     private String symbol;
@@ -22,9 +30,6 @@ public class User extends AbstractNamedEntity {
     @NotNull
     private double regPrice;
 
-    @Column(name = "userName", nullable = false, unique = true)
-    @NotBlank
-    private String userName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

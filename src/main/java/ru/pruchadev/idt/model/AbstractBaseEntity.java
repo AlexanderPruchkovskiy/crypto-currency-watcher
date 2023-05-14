@@ -4,6 +4,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 @Access(AccessType.FIELD)
+@MappedSuperclass
 public abstract class AbstractBaseEntity {
     public static final int START_SEQ = 100000;
 
